@@ -1,11 +1,16 @@
-import type { Activity } from "../types/types"
 import { useMemo } from "react"
+import { useActivity } from "../hooks/useActivity"
 
-type CalorieTrackerProps={
-    activities:Activity[]
-}
+export default function CalorieTracker(){
 
-export default function CalorieTracker( {activities}: CalorieTrackerProps){
+    //ACTUALIZACION CONTEXTAPI
+    const{state}=useActivity()
+
+    //renombramiento ACTUALIZACION CONTEXTAPI
+    const{activities}=state
+
+
+
 
     //contadores
     const caloriesConsumed=useMemo( () => 

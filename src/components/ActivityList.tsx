@@ -2,17 +2,17 @@ import type { Activity } from "../types/types"
 import { categories } from "../data/categories"
 import { useMemo } from "react"
 import { PencilSquareIcon, XCircleIcon} from '@heroicons/react/24/outline'
-import type { ActivityActions } from "../reducers/activityReducer"
+import { useActivity } from "../hooks/useActivity"
 
 
-export type ActivityListProps={
-    activities:Activity[],
-    dispatch:React.Dispatch<ActivityActions>
-}
 
-export default function ActivityList( {activities, dispatch}: ActivityListProps){
+export default function ActivityList(){
     
-    
+    //ACTUALIZACION CONTEXTAPI
+    const{state,dispatch}=useActivity()
+    const{activities}=state
+
+
     const categoryName=useMemo( () => 
         (cate:Activity['category']) =>
             categories.map(c => c.id===cate ? c.name : '')

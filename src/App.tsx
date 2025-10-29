@@ -1,15 +1,15 @@
 import Form from "./components/Form"
-import { useReducer, useEffect, useMemo } from "react"
-import { activityReducer, initialState } from "./reducers/activityReducer"
+import { useEffect, useMemo } from "react"
 import ActivityList from "./components/ActivityList"
 import CalorieTracker from "./components/CalorieTracker"
 import { FaRunning } from "react-icons/fa";
 import { MdOutlineFastfood } from "react-icons/md";
+import { useActivity } from "./hooks/useActivity"
 
 function App() {
 
+  const{state,dispatch}=useActivity()
 
-  const[state, dispatch]=useReducer(activityReducer, initialState)
 
   //para el Local Storage
   useEffect( () => {
@@ -65,28 +65,20 @@ function App() {
   
        <section className=" py-15 px-5">
           <div className="max-w-4xl mx-auto">
-            <Form
-              dispatch={dispatch}
-              state={state}
-            />
+            <Form />
           </div>
         </section>
 
 
         <section className="bg-gray-800 py-10">
           <div className="max-w-4xl mx-auto">
-            <CalorieTracker
-              activities={state.activities}
-            />
+            <CalorieTracker/>
           </div>
         </section>
 
 
         <section className="p-10 mx-auto max-w-4xl mb-20">
-          <ActivityList
-            activities={state.activities}
-            dispatch={dispatch}
-          />
+          <ActivityList/>
         </section>
       </main>
 

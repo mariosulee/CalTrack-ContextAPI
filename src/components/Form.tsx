@@ -1,14 +1,9 @@
 import { categories } from "../data/categories"
-import { useState, type Dispatch, useEffect} from "react"
+import { useState, useEffect} from "react"
 import type { Activity } from "../types/types"
-import type { ActivityActions } from "../reducers/activityReducer"
 import { v4 as uuidv4 } from "uuid"
-import type { ActivityState } from "../reducers/activityReducer"
+import { useActivity } from "../hooks/useActivity"
 
-type FormProps={
-    dispatch:Dispatch<ActivityActions>,
-    state:ActivityState
-}
 
 const initialState: Activity={
     id:uuidv4(), //esto genera un id unico
@@ -18,7 +13,9 @@ const initialState: Activity={
 }
 
 
-export default function Form( {dispatch, state} : FormProps ){
+export default function Form(){
+
+    const{state, dispatch}=useActivity()
 
     
     const [activity, setActivity]=useState<Activity>(initialState)
